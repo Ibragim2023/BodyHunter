@@ -1,10 +1,30 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
+class Customer(models.Model):
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL, unique=True)
+    session_anon = models.CharField(max_length=120, null=True, blank=True, editable=False)
+    
+    def __str__(self):
+        return self.user
+    
+    class Meta:
+        verbose_name = 'ПользовательЭкземпляр'
+        verbose_name_plural = 'ПользовательЭкземпляры'
 
 
 class Category(models.Model):
     name = models.CharField(max_length=60, null=True, db_index=True)
     slug = models.SlugField(unique=True, null=True, db_index=True)
     
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        
 
 class Product(models.Model):
     name = models.CharField(max_length=100, null=True)
@@ -14,8 +34,16 @@ class Product(models.Model):
     slug = models.SlugField(unique=True, db_index=True, max_length=30)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
     
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+    
 
 class Order(models.Model):
+    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
     complete = models.BooleanField(default=False, null=True)    
     added = models.DateTimeField(auto_now_add=True, null=True)
     
@@ -27,6 +55,10 @@ class Order(models.Model):
             total += i.countorditem
         return total
     
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+    
     
 class OrderItem(models.Model):
     product = models.ForeignKey('Product', null=True, on_delete=models.CASCADE)
@@ -37,9 +69,20 @@ class OrderItem(models.Model):
     def countorditem(self):
         return self.product.price * self.quantity
     
+    class Meta:
+        verbose_name = 'Товар заказа'
+        verbose_name_plural = 'Товары заказов'
+    
 
 class Shipping(models.Model):
     order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)
     city = models.CharField(max_length=120, null=True)
     street = models.CharField(max_length=150, null=True)
     homenumber = models.IntegerField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.street + str(self.homenumber)
+    
+    class Meta:
+        verbose_name = 'Доставка'
+        verbose_name_plural = 'Доставки'
