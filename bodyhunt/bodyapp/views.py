@@ -13,12 +13,12 @@ class MainShop(ListView):
     template_name = 'bodyapp/main.html'
 
 
-def updateItem(request):
+def updateCart(request):
     try:
         user = Customer.objects.get(session_anon=request.session['sesdata'])
     except Exception:
         request.session['sesdata'] = str(uuid4())
-        user = Customer.objects.create(session_anon=request.session['sesdata'])
+        user, created = Customer.objects.get_or_create(session_anon=request.session['sesdata'])
     
     order, created = Order.objects.get_or_create(customer=user, complete=False)
     data = json.loads(request.body)
@@ -32,32 +32,10 @@ def updateItem(request):
         orderitem.quantity += 1
     elif action == 'remove':
         orderitem.quantity -= 1
+    
+    orderitem.save()
         
     if orderitem.quantity <= 0:
         orderitem.delete()
     
-    orderitem.save()
-    
-    return JsonResponse('Succesfully adeed a product into the cart!')
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    # def updateItem(request):
-#     order = Order.objects.get_or_create(customer=user, complete=False)
-    
-#     data = json.loads(request.body)
-#     action = data['action']
-#     productid = data['productid']
-    
-    
+    return JsonResponse('Succesfully adeed a product into the cart!', safe=False)

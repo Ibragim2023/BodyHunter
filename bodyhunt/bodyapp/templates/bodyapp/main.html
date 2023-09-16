@@ -15,6 +15,27 @@
   </head>
 
   <body>
+    <script type="text/javascript">
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      const csrftoken = getCookie("csrftoken");
+    </script>
+
     <div class="wrapper">
       <div class="content">
         <div class="container">
@@ -48,10 +69,10 @@
                       <img src="{% static 'img/svg/sort.svg' %}" alt="" />
                     </div>
                     <p>сортировка по цене:</p>
-                    <select> 
-                      <option>по умолчанию</option> 
-                      <option>от большего</option> 
-                      <option>от меньшего</option> 
+                    <select>
+                      <option>по умолчанию</option>
+                      <option>от большего</option>
+                      <option>от меньшего</option>
                     </select>
                   </div>
                   <div class="search-space__search-block">
@@ -66,7 +87,7 @@
             </section>
             <section class="products">
               <div class="products__container">
-                {% for product in products %} 
+                {% for product in products %}
                 <div class="products__block">
                   <div class="products__img">
                     <img src="{{product.image.url}}" alt="" />
@@ -75,7 +96,13 @@
                     <p class="products__name">{{product.name}}</p>
                     <div class="products__price-btn">
                       <p class="products__price">Цена : {{product.price}}₽</p>
-                      <div data-product="{{product.id}}" data-action="add" class="products__btn">в корзину</div>
+                      <div
+                        data-product="{{product.id}}"
+                        data-action="add"
+                        class="products__btn"
+                      >
+                        в корзину
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -89,7 +116,7 @@
                     <img src="{% static 'img/svg/Iconl.svg' %}" alt="" />
                   </div>
                   {% for p in paginator.range %}
-                    <a class="pagination__block" href="?page={{p}}">p</a>
+                  <a class="pagination__block" href="?page={{p}}">p</a>
                   {% endfor %}
                   <div class="right-arr">
                     <img src="{% static 'img/svg/Iconr.svg' %}" alt="" />

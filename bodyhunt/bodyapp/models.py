@@ -7,7 +7,7 @@ class Customer(models.Model):
     session_anon = models.CharField(max_length=120, null=True, blank=True, editable=False)
     
     def __str__(self):
-        return self.user
+        return 'UsersAnon'
     
     class Meta:
         verbose_name = 'ПользовательЭкземпляр'
@@ -63,7 +63,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey('Product', null=True, on_delete=models.CASCADE)
     order = models.ForeignKey('Order', null=True, on_delete=models.CASCADE)
-    quantity = models.IntegerField(null=True, blank=True)
+    quantity = models.IntegerField(null=True, blank=True, default=0)
     
     @property
     def countorditem(self):
