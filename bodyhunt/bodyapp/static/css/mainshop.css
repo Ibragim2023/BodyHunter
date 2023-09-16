@@ -209,7 +209,7 @@ img {
 /* pagination start */
 
 .pagination__container {
-  width: 600px;
+  width: 400px;
   height: 35px;
   margin: 0 auto;
   color: #fbf9f9;
@@ -232,6 +232,15 @@ img {
   line-height: 35px;
   cursor: pointer;
   border-radius: 50%;
+
+
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.pagination__block-selected {
+  background-color: green;
 }
 
 .left-arr,

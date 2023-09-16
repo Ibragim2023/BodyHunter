@@ -65,15 +65,6 @@
               <div class="search-space__container">
                 <div class="search-space__sort-search-space">
                   <div class="search-space__sort-block">
-                    <div class="search-space__sort-logo">
-                      <img src="{% static 'img/svg/sort.svg' %}" alt="" />
-                    </div>
-                    <p>сортировка по цене:</p>
-                    <select>
-                      <option>по умолчанию</option>
-                      <option>от большего</option>
-                      <option>от меньшего</option>
-                    </select>
                   </div>
                   <div class="search-space__search-block">
                     <input
@@ -115,9 +106,19 @@
                   <div class="left-arr">
                     <img src="{% static 'img/svg/Iconl.svg' %}" alt="" />
                   </div>
-                  {% for p in paginator.range %}
-                  <a class="pagination__block" href="?page={{p}}">p</a>
-                  {% endfor %}
+                  {% if not page_obj.has_other_pages %}
+                  <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+                  {% elif page_obj.has_next and page_obj.has_previous %}
+                  <a class="pagination__block" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
+                  <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+                  <a class="pagination__block" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a>
+                  {% elif page_obj.has_next %}
+                  <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+                  <a class="pagination__block" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a>
+                  {% elif page_obj.has_previous %}
+                  <a class="pagination__block" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
+                  <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+                  {% endif %}
                   <div class="right-arr">
                     <img src="{% static 'img/svg/Iconr.svg' %}" alt="" />
                   </div>

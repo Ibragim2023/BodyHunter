@@ -6,7 +6,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Customer)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Category)
 admin.site.register(Shipping)
 admin.site.register(Order)
 admin.site.register(OrderItem)

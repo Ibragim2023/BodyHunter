@@ -9,7 +9,7 @@ import json
 class MainShop(ListView):
     model = Product
     context_object_name = 'products'
-    paginate_by = 10
+    paginate_by = 8
     template_name = 'bodyapp/main.html'
 
 
