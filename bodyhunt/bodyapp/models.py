@@ -7,32 +7,19 @@ class Customer(models.Model):
     session_anon = models.CharField(max_length=120, null=True, blank=True, editable=False)
     
     def __str__(self):
-        return self.user
+        return 'UsersAnon'
     
     class Meta:
         verbose_name = 'ПользовательЭкземпляр'
         verbose_name_plural = 'ПользовательЭкземпляры'
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=60, null=True, db_index=True)
-    slug = models.SlugField(unique=True, null=True, db_index=True)
-    
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
         
 
 class Product(models.Model):
-    name = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=23, null=True, unique=True)
     content = models.TextField(null=True, blank=True)
-    price = models.FloatField(null=True, blank=True)
+    price = models.IntegerField(null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     slug = models.SlugField(unique=True, db_index=True, max_length=30)
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
     
     def __str__(self):
         return self.name
@@ -63,7 +50,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     product = models.ForeignKey('Product', null=True, on_delete=models.CASCADE)
     order = models.ForeignKey('Order', null=True, on_delete=models.CASCADE)
-    quantity = models.IntegerField(null=True, blank=True)
+    quantity = models.IntegerField(null=True, blank=True, default=0)
     
     @property
     def countorditem(self):
