@@ -1,0 +1,66 @@
+{% extends 'bodyapp/base.html' %}
+{% load static %}
+{% block linkcss %} <link rel="stylesheet" href="{% static 'css/cart.css' %}"> {% endblock %}
+{% block title %} Корзина {% endblock %}
+          {% block content %} 
+          <main class="cart-space">
+            <section class="cart-head">
+              <div class="cart-head__container">
+                <div class="cart-head__info">
+                  <div class="cart-head__cart-logo">
+                    <img src="{% static 'img/svg/shopping-cart.svg' %}" alt="" /> 
+                  </div>
+                  <h2 class="cart-head__cart-title">Корзина</h2>
+                </div>
+                <div data-action="removeall" data-product="0" class="cart-head__rmv-btn updateitem">
+                  <div class="cart-head__rmv-logo">
+                    <img src="{% static 'img/svg/trash.svg' %}" alt="" /> 
+                  </div>
+                  <p class="cart-head__rmv-all">Очистить все</p>
+                </div>
+              </div>
+              <p class="cart-head__line"></p>
+            </section>
+            <section class="cart-products">
+              <div class="cart-products__container">
+                
+                {% for item in orditem %}
+                <div class="cart-products__item">
+                  <div class="cart-products__item-flex">
+                    <div class="cart-products__left">
+                      <div class="cart-products__img">
+                        <img src="{{item.product.image.url}}" alt="" /> 
+                      </div>
+                      <div class="cart-products__info">
+                        <div class="cart-products__name">{{item.product.name}}</div>
+                        <div class="cart-products__quantity">кол-во: {{item.quantity}}</div>
+                      </div>
+                    </div>
+                    <div class="cart-products__center">
+                      <div data-product="{{item.product.id}}" data-action="add" class="cart-products__add-btn updateitem">
+                        <img src="{% static 'img/svg/IconAdd.svg' %}" alt="" /> 
+                      </div>
+                      <div data-product="{{item.product.id}}" data-action="remove" class="cart-products__del-btn updateitem">
+                        <img src="{% static 'img/svg/IconDel.svg' %}" alt="" />
+                      </div>
+                    </div>
+                    <div class="cart-products__right">
+                      <div data-action="removeitem" data-product="{{item.product.id}}" class="cart-products__rmv updateitem">
+                        <img src="{% static 'img/svg/x.svg' %}" alt="" />
+                      </div>
+                      <p class="cart-products__sum">Цена: {{item.countorditem}}₽</p>
+                    </div>
+                  </div>
+                  <p class="cart-products__line"></p>
+                </div>
+                {% endfor %}
+              </div>
+            </section>
+            <section class="cart-bot">
+              <div class="cart-bot__container">
+                <p class="cart-bot__totaly-sum">Общая сумма: {{order.generalprice}}₽</p>
+                <div class="cart-bot__btn">Перейти к оплате</div>
+              </div>
+            </section>
+          </main>
+          {% endblock %}

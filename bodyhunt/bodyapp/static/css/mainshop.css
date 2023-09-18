@@ -69,6 +69,7 @@ img {
   font-weight: 300;
   align-items: center;
   border-radius: 5px;
+  text-decoration: none;
 }
 
 .header__btn:hover {
