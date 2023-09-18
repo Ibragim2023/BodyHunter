@@ -1,4 +1,4 @@
-var updateBtns = document.getElementsByClassName("products__btn");
+var updateBtns = document.getElementsByClassName("updateitem");
 
 for (var i = 0; i < updateBtns.length; i++) {
   updateBtns[i].addEventListener("click", function () {
