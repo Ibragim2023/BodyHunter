@@ -8,4 +8,5 @@ urlpatterns = [
     path('', cache_page(60 * 10)(MainShop.as_view()), name='main'),
     path('updatecart/', updateCart, name='updatecart'),
     path('cart', Cart.as_view(), name='cart'),
+    path('search', Search.as_view(), name='search')
 ]
