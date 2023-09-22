@@ -1,20 +1,24 @@
-{% extends 'bodyapp/base.html' %}
-{% load static %}
-{% block linkcss %} <link rel="stylesheet" href="{% static 'css/mainshop.css' %}" /> {% endblock %}
-{% block title %} Магазин {% endblock %}
-{% block content %}
+{% extends 'bodyapp/base.html' %} {% load static %} {% block linkcss %}
+<link rel="stylesheet" href="{% static 'css/mainshop.css' %}" /> {% endblock %}
+{% block title %} Магазин {% endblock %} {% block content %}
 <main class="shop-space">
   <section class="search-space">
     <div class="search-space__container">
       <div class="search-space__sort-search-space">
-        <div class="search-space__sort-block">
-        </div>
         <div class="search-space__search-block">
-          <input
-            placeholder="Введите название продукта..."
-            class="search-space__input"
-            type="text"
-          />
+          <form action="/search" method="get">
+            <input
+              placeholder="Введите название продукта..."
+              required=""
+              name="q"
+              class="search-space__input"
+              type="text"
+            />
+            <div class="form-flex">
+              <a href="{% url 'main' %}">Назад</a>
+              <button type="submit">Найти</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -50,17 +54,45 @@
           <img src="{% static 'img/svg/Iconl.svg' %}" alt="" />
         </div>
         {% if not page_obj.has_other_pages %}
-        <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+        <a
+          class="pagination__block pagination__block-selected"
+          href="?page={{page_obj.number}}"
+          >{{page_obj.number}}</a
+        >
         {% elif page_obj.has_next and page_obj.has_previous %}
-        <a class="pagination__block" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
-        <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
-        <a class="pagination__block" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a>
+        <a
+          class="pagination__block"
+          href="?page={{page_obj.previous_page_number}}"
+          >{{page_obj.previous_page_number}}</a
+        >
+        <a
+          class="pagination__block pagination__block-selected"
+          href="?page={{page_obj.number}}"
+          >{{page_obj.number}}</a
+        >
+        <a class="pagination__block" href="?page={{page_obj.next_page_number}}"
+          >{{page_obj.next_page_number}}</a
+        >
         {% elif page_obj.has_next %}
-        <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
-        <a class="pagination__block" href="?page={{page_obj.next_page_number}}">{{page_obj.next_page_number}}</a>
+        <a
+          class="pagination__block pagination__block-selected"
+          href="?page={{page_obj.number}}"
+          >{{page_obj.number}}</a
+        >
+        <a class="pagination__block" href="?page={{page_obj.next_page_number}}"
+          >{{page_obj.next_page_number}}</a
+        >
         {% elif page_obj.has_previous %}
-        <a class="pagination__block" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a>
-        <a class="pagination__block pagination__block-selected" href="?page={{page_obj.number}}">{{page_obj.number}}</a>
+        <a
+          class="pagination__block"
+          href="?page={{page_obj.previous_page_number}}"
+          >{{page_obj.previous_page_number}}</a
+        >
+        <a
+          class="pagination__block pagination__block-selected"
+          href="?page={{page_obj.number}}"
+          >{{page_obj.number}}</a
+        >
         {% endif %}
         <div class="right-arr">
           <img src="{% static 'img/svg/Iconr.svg' %}" alt="" />

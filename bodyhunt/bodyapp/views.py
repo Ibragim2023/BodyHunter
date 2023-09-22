@@ -1,5 +1,5 @@
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import *
 from django.http import JsonResponse
 from django.views.generic import ListView
@@ -72,3 +72,7 @@ def updateCart(request):
         orderitem.delete()
     
     return JsonResponse('Succesfully adeed a product into the cart!', safe=False)
+
+
+def notFound404(request, exception):
+    return HttpResponse("<h1>The page wasn't found</h1>")

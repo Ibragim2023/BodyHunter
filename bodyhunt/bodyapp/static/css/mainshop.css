@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -69,7 +73,6 @@ img {
   font-weight: 300;
   align-items: center;
   border-radius: 5px;
-  text-decoration: none;
 }
 
 .header__btn:hover {
@@ -102,9 +105,29 @@ img {
   margin-bottom: 45px;
 }
 
+.form-flex a,
+.form-flex button {
+  display: flex;
+  justify-content: space-around;
+  background-color: #343b51;
+  width: 140px;
+  height: 40px;
+  color: white;
+  font-size: 18px;
+  font-weight: 300;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+}
+
 .search-space__sort-search-space {
   display: flex;
   justify-content: space-between;
+}
+
+.search-space__search-block {
+  width: 350px;
+  margin: 0 auto;
 }
 
 .search-space__sort-block {
@@ -127,7 +150,7 @@ img {
 }
 
 .search-space__input {
-  width: 350px;
+  width: 100%;
   height: 40px;
   font-size: 15px;
   border-radius: 5px;
@@ -164,6 +187,8 @@ img {
 .products__img {
   width: 100%;
   height: 220px;
+  background-color: #9e9e9e;
+  border-radius: 10px;
 }
 
 .products__img img {
@@ -210,7 +235,7 @@ img {
 /* pagination start */
 
 .pagination__container {
-  width: 400px;
+  width: 600px;
   height: 35px;
   margin: 0 auto;
   color: #fbf9f9;
@@ -233,15 +258,6 @@ img {
   line-height: 35px;
   cursor: pointer;
   border-radius: 50%;
-
-
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.pagination__block-selected {
-  background-color: green;
 }
 
 .left-arr,
@@ -256,3 +272,63 @@ img {
 }
 
 /* pagination end */
+.form-flex {
+  display: flex;
+  margin-top: 15px;
+  justify-content: space-between;
+}
+/* adaptive start */
+
+@media (max-width: 1315px) {
+  .header__container {
+    width: 90%;
+  }
+
+  .shop-space {
+    width: 100%;
+  }
+
+  .products__container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .products__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 870px) {
+  .products__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 670px) {
+  .products__container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .form-flex a,
+  .form-flex button {
+  }
+
+  .header__desc {
+    display: none;
+  }
+
+  .header__btn p {
+    display: none;
+  }
+
+  .header__btn {
+    width: 50px;
+  }
+
+  .pagination__container {
+    width: 100%;
+  }
+}
+
+/* adaptive end */
