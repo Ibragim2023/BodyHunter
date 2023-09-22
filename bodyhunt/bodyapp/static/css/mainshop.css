@@ -229,6 +229,12 @@ img {
   border-radius: 5px;
   cursor: pointer;
   color: black;
+  transition: all 0.3s;
+}
+
+.products__btn:active {
+  background-color: black;
+  color: white;
 }
 
 /* products end */

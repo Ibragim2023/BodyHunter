@@ -17,6 +17,7 @@ for (var i = 0; i < updateBtns.length; i++) {
       return response.json();
     }).then(() => {
       console.log('Succesfully added!');
+      location.reload()
     })
   });
 }
