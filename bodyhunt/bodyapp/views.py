@@ -74,5 +74,21 @@ def updateCart(request):
     return JsonResponse('Succesfully adeed a product into the cart!', safe=False)
 
 
+class Search(ListView): 
+
+    template_name = 'bodyapp/main.html' 
+    context_object_name = 'products' 
+ 
+ 
+     
+    def get_queryset(self): 
+        query = self.request.GET.get('q', '') 
+        if query: 
+            results = Product.objects.filter(name__contains=query) 
+            return results 
+        else: 
+            return Product.objects.none()
+
+
 def notFound404(request, exception):
     return HttpResponse("<h1>The page wasn't found</h1>")

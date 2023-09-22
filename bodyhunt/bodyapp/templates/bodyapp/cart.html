@@ -2,6 +2,14 @@
 {% load static %}
 {% block linkcss %} <link rel="stylesheet" href="{% static 'css/cart.css' %}"> {% endblock %}
 {% block title %} Корзина {% endblock %}
+           {% block cartback %}
+            <a href="{% url 'main' %}" class="header__btn">
+              <div class="header__cart">
+                <img src="{% static 'img/svg/reply.svg' %}" alt="" />
+              </div>
+              <p>Магазин</p>
+            </a>
+            {% endblock %}
           {% block content %} 
           <main class="cart-space">
             <section class="cart-head">
